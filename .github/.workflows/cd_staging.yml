@@ -1,14 +1,12 @@
 name: Deploy to staging
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
-  redeploy_frontend:
-    runs-on: ubantu-latest
-    name: Deploying everything to the staging cluster
+  redeploy_everything:
     runs-on: ubuntu-latest
-
+    name: Deploying everything to the staging cluster
     steps:
       - run: |
           echo ${{secrets.SSH_PRIVATE_KEY}} &> ssh_key
