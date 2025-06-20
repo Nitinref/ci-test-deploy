@@ -11,7 +11,7 @@ jobs:
 
     steps:
        - run: |
-          echo ${{secrets.SSH_PRIVATE_KEY}} &> ssh_key
+          echo ${{secrets.SSH_PRIVATE_KEY}} &> ~/ssh_key
           ssh -i ~/.ssh/id_rsa ubuntu@34.194.131.148
           cd ci-test-deploy/ && git pull
           pnpm install
