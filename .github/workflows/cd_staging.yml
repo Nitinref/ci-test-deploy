@@ -22,11 +22,8 @@ jobs:
           echo "${{secrets.KNOWN_HOSTS}}" &> /home/runner/.ssh/
           known_hosts
           chmod 700 /home/runner/ssh_key
-          ssh -i ~/.ssh/id_rsa ubuntu@34.194.131.148
-          cd ci-test-deploy/ && git pull
-          pnpm install
-          pnpm run build
-          pm2 restart fe-server
-          pm2 restart http-server
-          pm2 restart ws-serve
+          ssh -i ~/.ssh/id_rsa ubuntu@34.194.131.148 -t "cd
+          cd ci-test-deploy/ && git pull origin main && pnpm install && pnpm run
+          build && pm2 restart fe-server && pm2 restart http-server &&
+          pm2 restart ws-server"
 
