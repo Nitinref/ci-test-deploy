@@ -9,7 +9,7 @@ jobs:
     name: Deploying everything to the staging cluster
     steps:
       - run: |
-          echo ${{secrets.SSH_PRIVATE_KEY}} &> ssh_key
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
           ssh -i ~/ssh_key ubuntu@34.194.131.148
           cd ci-test-deploy/ && git pull
           pnpm install
