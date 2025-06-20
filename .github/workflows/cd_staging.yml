@@ -1,0 +1,29 @@
+name: Deploy to staging
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  redeploy_frontend:
+    name: Deploying everything to the staging cluster
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create SSH key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
+          chmod 600 ssh_key
+
+      - name: SSH into server and deploy
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ssh_key ubuntu@34.194.131.148 << 'EOF'
+            cd ci-test-deploy/
+            git pull
+            pnpm install
+            pnpm run build
+            pm2 restart fe-server
+            pm2 restart http-server
+            pm2 restart ws-server
+          EOF
