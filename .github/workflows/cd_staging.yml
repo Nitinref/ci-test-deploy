@@ -16,8 +16,12 @@ jobs:
 
        - run: |
           echo "${{secrets.SSH_PRIVATE_KEY}}" &> ~/ssh_key
-          mkdir .ssh
-          echo "${{secrets.KNOWN_HOSTS}}" &> ~/.ssh/Known_hosts
+          mkdir -p /home/runner/.ssh
+          ls /home/runner/.ssh
+          touch /home/runner/.ssh/known_hosts
+          echo "${{secrets.KNOWN_HOSTS}}" &> /home/runner/.ssh/
+          known_hosts
+          chmod 700 /home/runner/ssh_key
           ssh -i ~/.ssh/id_rsa ubuntu@34.194.131.148
           cd ci-test-deploy/ && git pull
           pnpm install
