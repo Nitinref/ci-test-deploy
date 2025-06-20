@@ -7,8 +7,13 @@ export default async function Home() {
   });
 
   return (
-    <ul>
+    <div>
+      name:
+      password:
+        <ul>
       {users.map(u => <li key={u.username}>{u.username}</li>)}
-    </ul>
+         </ul>
+    </div>
+
   );
 }
